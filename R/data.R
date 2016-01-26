@@ -69,21 +69,43 @@ NULL
 #'
 #' @details
 #'
-#' Coverage estimates were preprocessed using \code{sv_preprocess} in
-#'   1kb bins.  The autosomal median absolute deviation (MAD) was used
-#'   as a robust measure of coverage variation. Bins for which two or
-#'   more of the 10 lymphoblast cell lines had a preprocessed coverage
-#'   estimate 5 or more MADs from zero were categorized as outliers.
-#'   Segmentation of the preprocessed coverage estimates was performed
-#'   with circular binary segmentation with default parameters from
-#'   \code{SegmentParam}.  Any segment with mean less than -1 or
-#'   greater than 1 was considered a deletion or amplification,
-#'   respectively.  The genomic intervals for outliers, deletions, and
-#'   amplifications were combined in a single object
+#' Coverage estimates for 10 lymphoblast cell lines were developed
+#'   using the package \code{svpreprocess} in non-overlapping 1kb bins
+#'   along the genome.  The autosomal median absolute deviation (MAD)
+#'   was used as a robust measure of variance for log2-transformed
+#'   counts. Log2-transformed counts were adjusted for GC content, as
+#'   well as a loess smoother of background coverage estimates.  Bins
+#'   for which two or more of the 10 lymphoblast cell lines had a
+#'   preprocessed coverage estimate 5 or more MADs from zero were
+#'   categorized as outliers.  Segmentation of the preprocessed
+#'   coverage estimates was performed using circular binary
+#'   segmentation with default settings (see \code{svcnvs} package).
+#'   For purposes of an ad-hoc germline filter, segments with means
+#'   less than -1 or greater than 1 were considered deletions or
+#'   amplicons, respectively.  The genomic intervals for outliers,
+#'   deletions, and amplicons were combined in a single object.
+#'
+#' @seealso \code{\link{bins1kb_hg19}}
 #'
 #' @docType data
 #' @name lymphoblast_filters_hg19
 #' @usage data(lymphoblast_filters_hg19)
 #' @aliases lymphoblast_filters_hg19
 #' @format a \code{GRanges} object
+NULL
+
+
+#' Transcripts with approved HGNC symbols for build hg19
+#'
+#' Build hg19 corresonds to Ensembl build 75 and NCBI build 37.
+#'
+#' @docType data
+#' @keywords datasets
+#' @name tx_hg19
+#' @usage data(tx_hg19)
+#' @aliases tx_hg19
+#' @format a \code{GRanges} object
+#'
+#' @examples
+#' data(tx_hg19)
 NULL
