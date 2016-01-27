@@ -109,3 +109,19 @@ NULL
 #' @examples
 #' data(tx_hg19)
 NULL
+
+#' Genome gaps
+#'
+#' Gaps in UCSC build hg19 genome, including heterochromatin,
+#' centromeres, and telomeres.
+#'
+#' @docType data
+#' @keywords datasets
+#' @name gaps_hg19
+#' @usage data(gaps_hg19)
+#' @aliases gaps_hg19
+#' @format a \code{GRanges} object
+#'
+#' @examples
+#' data(gaps_hg19)
+NULL

@@ -16,7 +16,7 @@
 #' @return a named list
 #'
 #' @examples
-#'   filters <- listGenomeFilters()
+#' filters <- listGenomeFilters()
 #' 
 #' @export
 #' 
@@ -25,14 +25,17 @@
 #' 
 listGenomeFilters <- function(ucsc_build="hg19"){
   if(ucsc_build != "hg19") stop("Only available for build hg19")
-  data(tx_hg19)
-  tx <- get("tx_hg19")  
-  data(binAssemblyGaps_hg19)
+  data(tx_hg19, envir=environment())
+  tx <- get("tx_hg19")
+  si <- seqinfo(tx)
+  genome(si) <- "hg19"
+  seqinfo(tx) <- si
+  data(binAssemblyGaps_hg19, envir=environment())
   binAssemblyGaps <- get("binAssemblyGaps_hg19")
-  data(gaps_hg19)
-  gaps <- get("gaps")
+  data(gaps_hg19, envir=environment())
+  gaps <- get("gaps_hg19")
   centromeres <- gaps[gaps$type=="centromere"]
-  data(lymphoblast_filters_hg19)
+  data(lymphoblast_filters_hg19, envir=environment())
   lymphoblast_filters <- get("lymphoblast_filters_hg19")
   lymphoblast_cnv <- reduce(c(lymphoblast_filters[["amplicon"]],
                               lymphoblast_filters[["deletion"]]))
