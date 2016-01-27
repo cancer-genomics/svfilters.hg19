@@ -27,9 +27,6 @@ listGenomeFilters <- function(ucsc_build="hg19"){
   if(ucsc_build != "hg19") stop("Only available for build hg19")
   data(tx_hg19, envir=environment())
   tx <- get("tx_hg19")
-  si <- seqinfo(tx)
-  genome(si) <- "hg19"
-  seqinfo(tx) <- si
   data(binAssemblyGaps_hg19, envir=environment())
   binAssemblyGaps <- get("binAssemblyGaps_hg19")
   data(gaps_hg19, envir=environment())
