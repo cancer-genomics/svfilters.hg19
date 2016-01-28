@@ -21,5 +21,5 @@ getTranscripts <- function(){
   tx$cancer_connection <- tx$gene_name %in% cancer.genes
   ## gene_name has the approved HGNC gene name
   tx_hg19 <- tx
-  save(tx_hg19, file="~/Software/svpackages/svdata/data/tx_hg19.rda")
+  save(tx_hg19, file="~/Software/svpackages/svfilters/data/tx_hg19.rda")
 }
