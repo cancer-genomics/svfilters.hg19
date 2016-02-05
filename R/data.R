@@ -125,3 +125,23 @@ NULL
 #' @examples
 #' data(gaps_hg19)
 NULL
+
+#' Lymphoblast rearrangement intervals
+#'
+#' Genomic intervals demarcating clusters of reads involved in
+#' improper pairs were identified in a set of 10 lymphoblast cell
+#' lines.  The genomic intervals that could could be linked by 5 or
+#' more read pairs were reduced.  These reduced intervals are used to
+#' remove potential germline rearrangements.
+#'
+#' @docType data
+#' @keywords datasets
+#' @name lymphoblast_rear_hg19
+#' @usage data(lymphoblast_rear_hg19)
+#' @aliases lymphoblast_rear_hg19
+#' @format a \code{GRanges} object
+#'
+#' @examples
+#' data(lymphoblast_rear_hg19)
+#' sum(width(lymphoblast_rear_hg19))/1e6
+NULL

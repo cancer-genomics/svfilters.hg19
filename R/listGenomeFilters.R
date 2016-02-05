@@ -34,12 +34,17 @@ listGenomeFilters <- function(ucsc_build="hg19"){
   centromeres <- gaps[gaps$type=="centromere"]
   data(lymphoblast_filters_hg19, envir=environment())
   lymphoblast_filters <- get("lymphoblast_filters_hg19")
-  lymphoblast_cnv <- reduce(c(lymphoblast_filters[["amplicon"]],
-                              lymphoblast_filters[["deletion"]]))
-  lymphoblast_out <- lymphoblast_filters[["outlier"]]
+
+  data(normalblood_filters_hg19, envir=environment())
+  cnv <- reduce(c(lymphoblast_filters[["amplicon"]],
+                  lymphoblast_filters[["deletion"]],
+                  normalblood_filters[["amplicon"]],
+                  normalblood_filters[["deletion"]]))
+  out <- reduce(c(lymphoblast_filters[["outlier"]],
+                  normalblood_filters[["outlier"]]))
   list(centromeres=centromeres,
        assembly_gaps=binAssemblyGaps,
-       germline_cnv=lymphoblast_cnv,
-       outliers=reduce(lymphoblast_out),
+       germline_cnv=cnv,
+       outliers=out,
        transcripts=tx)
 }
