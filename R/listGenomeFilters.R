@@ -36,6 +36,7 @@ listGenomeFilters <- function(ucsc_build="hg19"){
   lymphoblast_filters <- get("lymphoblast_filters_hg19")
 
   data(normalblood_filters_hg19, envir=environment())
+  normalblood_filters <- get("normalblood_filters_hg19")
   cnv <- reduce(c(lymphoblast_filters[["amplicon"]],
                   lymphoblast_filters[["deletion"]],
                   normalblood_filters[["amplicon"]],
@@ -47,4 +48,72 @@ listGenomeFilters <- function(ucsc_build="hg19"){
        germline_cnv=cnv,
        outliers=out,
        transcripts=tx)
+}
+
+#' Create a reduced set of germline and sequence filters
+#'
+#' @details
+#'
+#' The reduced set is restricted to the sequence names provided in
+#'   \code{seqlev} (if provided).
+#'
+#' @examples
+#' filters <- reduceGenomeFilters("hg19")
+#'
+#' @seealso \code{\link{listGenomeFilters}}
+#'
+#' @return a reduced \code{GRanges} object of germline and sequence filters
+#' @export
+#' @param ucsc_build character string providing the UCSC genome build
+#' @param seqlev character vector of sequence names
+#' @seealso See \code{\link[GenomicRanges]{inter-range-methods}} for a
+#'   description of \code{reduce}.
+#' 
+reduceGenomeFilters <- function(ucsc_build="hg19"){
+  filters <- listGenomeFilters(ucsc_build, seqlev)
+  r <- reduce(unlist(GRangesList(lapply(filters, granges))))
+  if(missing(seqlev)) return(r)
+  keepSeqlevels(r, seqlev)  
+}
+
+#' List germline rearrangement filters derived from 10 lymphoblast
+#' cell lines (mixed ethnicities) and 8 normal blood sammples.
+#'
+#' @return a \code{GRangesList}
+#' @examples
+#' listRearFilters("hg19")
+#' @seealso \code{\link{reduceRearFilters}}
+#' @export
+#' @param ucsc_build character string providing the UCSC genome build
+listRearFilters <- function(ucsc_build="hg19"){
+  if(ucsc_build != "hg19") stop("Only available for build hg19")
+  data(lymphoblast_rear_hg19, envir=environment())
+  data(normalblood_rear_hg19, envir=environment())
+  GRangesList(lymphoblast=lymphoblast_rear_hg19,
+              normalblood=normalblood_rear_hg19)
+}
+
+#' Provides a reduced set of germline rearrangement filters derived
+#' from 10 lymphoblast cell lines (mixed ethnicities) and 8 normal
+#' blood sammples.
+#'
+#' @details
+#'
+#' The reduced set is restricted to the sequence names provided in
+#'   \code{seqlev} (if provided).
+#'
+#' @examples
+#' reduceRearFilters("hg19")
+#'
+#' @return a \code{GRanges} object
+#' @seealso \code{\link{listRearFilters}}
+#' @param ucsc_build character string providing the UCSC genome build
+#' @param seqlev character vector of sequence names
+#' 
+#' @export
+reduceRearFilters <- function(ucsc_build="hg19", seqlev){
+  filters <- listRearFilters(ucsc_build)
+  r <- reduce(unlist(filters))
+  if(missing(seqlev)) return(r)
+  keepSeqlevels(r, seqlev)
 }

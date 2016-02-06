@@ -6,6 +6,9 @@ Description: Provides GRanges objects as filters for structural variant
     analyses.
 Depends: 
     R (>= 3.2.0), GenomicRanges
+Imports:
+    BiocGenerics
+Suggests: svovarian    
 License: Artistic-2.0
 LazyData: true
 RoxygenNote: 5.0.1
