@@ -32,18 +32,23 @@ listGenomeFilters <- function(ucsc_build="hg19"){
   data(gaps_hg19, envir=environment())
   gaps <- get("gaps_hg19")
   centromeres <- gaps[gaps$type=="centromere"]
-  data(lymphoblast_filters_hg19, envir=environment())
-  lymphoblast_filters <- get("lymphoblast_filters_hg19")
 
-  data(normalblood_filters_hg19, envir=environment())
-  normalblood_filters <- get("normalblood_filters_hg19")
-  cnv <- reduce(c(lymphoblast_filters[["amplicon"]],
-                  lymphoblast_filters[["deletion"]],
-                  normalblood_filters[["amplicon"]],
-                  normalblood_filters[["deletion"]]))
-  out <- reduce(c(lymphoblast_filters[["outlier"]],
-                  normalblood_filters[["outlier"]]))
-  list(centromeres=centromeres,
+  data(coverage_filters_hg19, envir=environment())
+  cnv <- reduce(c(coverage_filters[["amplicon"]],
+                  coverage_filters[["deletion"]]))
+  out <- reduce(coverage_filters[["outlier"]])
+  ##  data(lymphoblast_filters_hg19, envir=environment())
+  ##  lymphoblast_filters <- get("lymphoblast_filters_hg19")
+  ##
+  ##  data(normalblood_filters_hg19, envir=environment())
+  ##  normalblood_filters <- get("normalblood_filters_hg19")
+  ##  cnv <- reduce(c(lymphoblast_filters[["amplicon"]],
+  ##                  lymphoblast_filters[["deletion"]],
+  ##                  normalblood_filters[["amplicon"]],
+  ##                  normalblood_filters[["deletion"]]))
+  ##  out <- reduce(c(lymphoblast_filters[["outlier"]],
+  ##                  normalblood_filters[["outlier"]]))
+   list(centromeres=centromeres,
        assembly_gaps=binAssemblyGaps,
        germline_cnv=cnv,
        outliers=out,
@@ -69,8 +74,8 @@ listGenomeFilters <- function(ucsc_build="hg19"){
 #' @seealso See \code{\link[GenomicRanges]{inter-range-methods}} for a
 #'   description of \code{reduce}.
 #' 
-reduceGenomeFilters <- function(ucsc_build="hg19"){
-  filters <- listGenomeFilters(ucsc_build, seqlev)
+reduceGenomeFilters <- function(ucsc_build="hg19", seqlev){
+  filters <- listGenomeFilters(ucsc_build)
   r <- reduce(unlist(GRangesList(lapply(filters, granges))))
   if(missing(seqlev)) return(r)
   keepSeqlevels(r, seqlev)  
