@@ -1,7 +1,7 @@
 library(svovarian)
 library(svcnvs)
 data(lymph_ids)
-dp <- projectOvarian(rootname="OvarianData2")
+dp <- projectOvarian()
 pviews <- readRDS(file.path(dp["final_preprocess"], "pviews_hg19.rds"))
 pviews <- pviews[, lymph_ids]
 grl <- readRDS(file.path(dp["segment"], "grl_lymphoblasts_hg19.rds"))
