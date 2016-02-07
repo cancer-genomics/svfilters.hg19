@@ -1,4 +1,5 @@
 library(normalblood)
+library(svfilters)
 library(svcnvs)
 dp <- projectBlood()
 data(ids)
@@ -12,13 +13,13 @@ g <- unlist(grl)
 amps <- granges(g[g$seg.mean >= 1])
 dels <- granges(g[g$seg.mean <= -1])
 outs <- granges(germlineOutliers(pviews, NMAD=5))
-outs$seg.mean <- granges_copynumber(outs, pviews)
-dels$seg.mean <- granges_copynumber(dels, pviews)
-amps$seg.mean <- granges_copynumber(amps, pviews)
+## all are female
+dels <- reduce(keepSeqlevels(dels, paste0("chr", c(1:22, "X"))))
+amps <- reduce(keepSeqlevels(amps, paste0("chr", c(1:22, "X"))))
+outs <- reduce(keepSeqlevels(outs, paste0("chr", c(1:22, "X"))))
 outs$type <- "outlier"
 dels$type <- "deletion"
 amps$type <- "amplicon"
-tracks <- GRangesList(list(amplicon=amps, deletion=dels, outlier=outs))
-path <- "~/Software/svpackages/svfilters/data"
-normalblood_filters_hg19 <- tracks
+normalblood_filters_hg19 <- GRangesList(list(amplicon=amps, deletion=dels, outlier=outs))
+path <- "/dcl01/scharpf/data/svpackages/svfilters/data"
 save(normalblood_filters_hg19, file=file.path(path, "normalblood_filters_hg19.rda"))
