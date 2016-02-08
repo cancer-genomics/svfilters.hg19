@@ -32,17 +32,17 @@ listGenomeFilters <- function(ucsc_build="hg19"){
   data(gaps_hg19, envir=environment())
   gaps <- get("gaps_hg19")
   centromeres <- gaps[gaps$type=="centromere"]
-  if(FALSE){
-    data(coverage_filters_hg19, envir=environment())
-    cnv <- reduce(c(coverage_filters[["amplicon"]],
-                    coverage_filters[["deletion"]]))
-    out <- reduce(coverage_filters[["outlier"]])
-  }
-  data(lymphoblast_filters_hg19, envir=environment())
-  lymphoblast_filters <- get("lymphoblast_filters_hg19")
-  cnv <- reduce(c(lymphoblast_filters[["amplicon"]],
-                  lymphoblast_filters[["deletion"]]))
-  out <- reduce(lymphoblast_filters[["outlier"]])
+##  if(FALSE){
+  data(coverage_filters_hg19, envir=environment())
+  cnv <- reduce(c(coverage_filters_hg19[["amplicon"]],
+                  coverage_filters_hg19[["deletion"]]))
+  out <- reduce(coverage_filters_hg19[["outlier"]])
+##}
+##  data(lymphoblast_filters_hg19, envir=environment())
+##  lymphoblast_filters <- get("lymphoblast_filters_hg19")
+##  cnv <- reduce(c(lymphoblast_filters[["amplicon"]],
+##                  lymphoblast_filters[["deletion"]]))
+##  out <- reduce(lymphoblast_filters[["outlier"]])
   list(centromeres=centromeres,
        assembly_gaps=binAssemblyGaps,
        germline_cnv=cnv,
