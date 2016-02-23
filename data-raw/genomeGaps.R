@@ -23,4 +23,5 @@ gaps.gr <- GRanges(gaps$chrom, IRanges(gaps$chromStart,
 gaps_hg18 <- gaps.gr
 ## no gaps available in mitochondria
 gaps_hg18 <- keepSeqlevels(gaps_hg18, paste0("chr", c(1:22, "X", "Y")))
+seqinfo(gaps_hg18) <- seqinfo(Hsapiens)[seqlevels(gaps_hg18), ]
 save(gaps_hg18, file="/dcl01/scharpf/data/svpackages/svfilters/data/gaps_hg18.rda")
