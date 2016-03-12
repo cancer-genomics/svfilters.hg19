@@ -60,10 +60,12 @@ df$previous_hgnc[index] <- old_hgnc2
 write.csv(df, file="~/Software/svpackages/svfilters/inst/extdata/cancer_genes_2016-03-05.csv",
           row.names=FALSE)
 
-
+df <- read.csv("~/Software/svpackages/svfilters/inst/extdata/cancer_genes_2016-03-05.csv",
+               stringsAsFactors=FALSE)
 df <- df[!is.na(df$biol_sign), ]
 cancer.genes <- df$biol_sign[df$is_clin_sign]
 tx$cancer_connection <- tx$gene_name %in% cancer.genes
+tx$biol_sign <- tx$gene_name %in% df$biol_sign
 ## gene_name has the approved HGNC gene name
 tx_hg19 <- tx
 save(tx_hg19, file="~/Software/svpackages/svfilters/data/tx_hg19.rda")
