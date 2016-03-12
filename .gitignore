@@ -1,7 +1,5 @@
 .Rproj.user
 .Rhistory
-.RData
 /.Rbuildignore
 /svfilters.Rproj
 man
-data/
