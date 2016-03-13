@@ -1,4 +1,4 @@
 library(testthat)
-library(svfilters)
+library(svfilters.hg19)
 
-test_check("svfilters")
+test_check("svfilters.hg19")
