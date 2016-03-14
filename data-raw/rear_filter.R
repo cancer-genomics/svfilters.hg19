@@ -1,16 +1,18 @@
-
 library(svovarian)
-library(svfilters)
+library(svfilters.hg19)
 library(svrearrange)
-dp <- projectOvarian(rootname="OvarianData2")
-lymphoblast_rfiles <- file.path(dp["1somatic"], paste0("CGH", 1:10, "N.rds"))
-lymphoblast_rear <- lapply(lymphoblast_rfiles, readRDS)
-lb <- lapply(lymphoblast_rear, linkedBins)
+library(germline)
+dp <- projectGermline()
+## includes both cell lines and normal blood
+rear_files <- list.files(dp["rearrangements/germline"], full.names=TRUE)
+
+##lymphoblast_rfiles <- file.path(dp["1somatic"], paste0("CGH", 1:10, "N.rds"))
+rears <- lapply(rear_files, readRDS)
+lb <- lapply(rears, linkedBins)
 lt <- lapply(lb, function(x) x$linked.to)
 lb <- GRangesList(lb)
 lt <- GRangesList(lt)
 lb <- unlist(lb)
 lt <- unlist(lt)
-rear_intervals <- reduce(c(granges(lb), lt))
-lymphoblast_rear_hg19 <- rear_intervals
-save(lymphoblast_rear_hg19, file="~/Software/svpackages/svfilters/data/lymphoblast_rear_hg19.rda")
+germline_rear <- reduce(c(granges(lb), lt))
+save(germline_rear, file="~/Software/svpackages/svfilters.hg19/data/germline_rear.rda")
