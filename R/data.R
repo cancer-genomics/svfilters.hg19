@@ -175,3 +175,14 @@ NULL
 #' @examples
 #' data(germline_rear)
 NULL
+
+#' Retrieve known drivers
+#'
+#' @export
+#' @return character-vector of HGNC symbols of drivers
+drivers <- function(){
+  data(transcripts, package="svfilters.hg19", envir=environment())
+  genes <- transcripts$gene_name[transcripts$cancer_connection]
+  genes <- unique(genes)
+  genes
+}
