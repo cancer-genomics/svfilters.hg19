@@ -92,7 +92,7 @@ NULL
 NULL
 
 
-#' Transcripts with approved HGNC symbols 
+#' Transcripts with approved HGNC symbols
 #'
 #' Build hg19 corresonds to Ensembl build 75 and NCBI build 37.
 #'
@@ -176,7 +176,7 @@ NULL
 #' data(germline_rear)
 NULL
 
-#' Retrieve known drivers
+#' Retrieve known drivers from transcripts object
 #'
 #' @export
 #' @return character-vector of HGNC symbols of drivers
@@ -186,3 +186,21 @@ drivers <- function(){
   genes <- unique(genes)
   genes
 }
+
+#' A list of germline filters derived from lymphoblastoid cell lines and ovarian
+#' matched normal samples
+#'
+#' Contains genomic intervals for outliers, deletions, and amplifications
+#' identified in lymphoblastoid cell lines and hematopoeietic samples
+#'
+#' @export
+#' @docType data
+#' @keywords datasets
+#' @name germline_filters
+#' @usage data(germline_filters)
+#' @aliases germline_filters
+#' @format a list of germline filters
+#' @examples
+#' data(germline_filters)
+
+
