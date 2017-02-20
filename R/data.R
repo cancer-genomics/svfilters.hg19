@@ -193,7 +193,6 @@ drivers <- function(){
 #' Contains genomic intervals for outliers, deletions, and amplifications
 #' identified in lymphoblastoid cell lines and hematopoeietic samples
 #'
-#' @export
 #' @docType data
 #' @keywords datasets
 #' @name germline_filters
@@ -202,5 +201,4 @@ drivers <- function(){
 #' @format a list of germline filters
 #' @examples
 #' data(germline_filters)
-
-
+"germline_filters"
