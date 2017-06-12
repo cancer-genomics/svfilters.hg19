@@ -187,6 +187,13 @@ drivers <- function(){
   genes
 }
 
+biolInterest <- function(){
+  data(transcripts, package="svfilters.hg19", envir=environment())
+  genes <- transcripts$gene_name[transcripts$biol_sign]
+  genes <- unique(genes)
+  genes
+}
+
 #' A list of germline filters derived from lymphoblastoid cell lines and ovarian
 #' matched normal samples
 #'
@@ -202,3 +209,16 @@ drivers <- function(){
 #' @examples
 #' data(germline_filters)
 "germline_filters"
+
+#' Load Txdb object
+#'
+#' @return a \code{TxDb} object
+#' @examples
+#' library(svfilters.hg19)
+#' tx <- loadTx()
+#' tx
+#' @export
+loadTx <- function(){
+  data(transcripts, envir=environment())
+  transcripts
+}
