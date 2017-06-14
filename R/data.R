@@ -209,16 +209,3 @@ biolInterest <- function(){
 #' @examples
 #' data(germline_filters)
 "germline_filters"
-
-#' Load Txdb object
-#'
-#' @return a \code{TxDb} object
-#' @examples
-#' library(svfilters.hg19)
-#' tx <- loadTx()
-#' tx
-#' @export
-loadTx <- function(){
-  data(transcripts, envir=environment())
-  transcripts
-}
