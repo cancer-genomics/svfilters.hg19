@@ -9,8 +9,10 @@ genomeGaps <- function(){
                      type=gaps$type)
   gaps_hg19 <- gaps.gr
   ## no gaps available in mitochondria
-  gaps_hg19 <- keepSeqlevels(gaps_hg19, paste0("chr", c(1:22, "X", "Y")))
-  save(gaps_hg19, file="~/Software/svpackages/svfilters/data/gaps_hg19.rda")
+  gaps_hg19 <- keepSeqlevels(gaps_hg19, paste0("chr", c(1:22, "X", "Y")), pruning.mode = "coarse") 
+  seqinfo(gaps_hg19) <- seqinfo(Hsapiens)[seqlevels(gaps_hg19), ]
+  gaps <- trim(gaps_hg19)
+  save(gaps, file="/Users/dbruhm/Desktop/cancer-genomics/svfilters.hg19/data/gaps.rda")
 }
 library(BSgenome.Hsapiens.UCSC.hg18)
 genome <- "hg18"
