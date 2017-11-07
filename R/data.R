@@ -209,3 +209,20 @@ biolInterest <- function(){
 #' @examples
 #' data(germline_filters)
 "germline_filters"
+
+
+#' A set of 1 million frequently heterozygous SNPs from dbSNP build 150 
+#'
+#' A \code{GRanges} object of SNP positions from dbSNP build 150.
+#' Metadata columns for the reference allele and alternate allele are included.
+#' 
+#' @docType data
+#' @keywords datasets
+#' @name snps
+#' @usage data(snps)
+#' @aliases snps
+#' @format a \code{GRanges} object
+#'
+#' @examples
+#' data(germline_rear)
+NULL
