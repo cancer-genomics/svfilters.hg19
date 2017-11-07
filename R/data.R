@@ -224,5 +224,5 @@ biolInterest <- function(){
 #' @format a \code{GRanges} object
 #'
 #' @examples
-#' data(germline_rear)
+#' data(snps)
 NULL
