@@ -59,33 +59,12 @@ genome(gr) <- "hg19"
 seqlengths(gr) <- seqlengths(svfilters.hg19::bins1kb)
 strand(gr) <- "+"
 
-
-# liftOver to hg18
-
-library(rtracklayer)
-
-chain <- import.chain("/dcl01/scharpf1/data/dbruhm/svpipeline/data/hg19ToHg18.over.chain")
-gr18 <- unlist(liftOver(gr, chain))
-gr18 <- sortSeqlevels(gr18)
-strand(gr18) <- "+"
-
-# Replacing seqinfo with that from bins1kb in svfilters.hg18
-genome(gr18) <- "hg18"
-seqlengths(gr18) <- seqlengths(svfilters.hg18::bins1kb)
-
-# Random sample 1,000,000 SNPs from the hg19 and the hg18 GRanges
+# Random sample 1,000,000 SNPs
 gr <- gr[sample(1:length(gr), size = 1000000, replace = FALSE)]
-gr18 <- gr18[sample(1:length(gr18), size = 1000000, replace = FALSE)]
 
 # Sort
 gr <- sort(gr)
-gr18 <- sort(gr18)
-
-# Save objects both under the name snps
 
 snps <- gr
 save(snps, file = "/dcl01/scharpf1/data/dbruhm/svpipeline/data/hg19/snps.rda")
-
-snps <- gr18
-save(snps, file = "/dcl01/scharpf1/data/dbruhm/svpipeline/data/hg18/snps.rda")
 #-----------------------------------------------------------------------------------------------------
