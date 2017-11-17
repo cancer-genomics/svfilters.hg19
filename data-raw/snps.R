@@ -59,6 +59,9 @@ genome(gr) <- "hg19"
 seqlengths(gr) <- seqlengths(svfilters.hg19::bins1kb)
 strand(gr) <- "+"
 
+# Remove any overlapping positions
+gr <- gr[which(countOverlaps(gr, gr) == 1)]
+
 # Random sample 1,000,000 SNPs
 gr <- gr[sample(1:length(gr), size = 1000000, replace = FALSE)]
 
