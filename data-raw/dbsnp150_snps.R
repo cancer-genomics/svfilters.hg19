@@ -71,7 +71,7 @@ genome(gr) <- "hg19"
 seqlengths(gr) <- seqlengths(svfilters.hg19::bins1kb)
 
 # Remove any overlapping positions
-gr <- gr[which(countOverlaps(gr, gr) == 1)]
+gr <- gr[which(countOverlaps(gr, gr, ignore.strand = TRUE) == 1)]
 
 # Sort
 gr <- sort(gr)
