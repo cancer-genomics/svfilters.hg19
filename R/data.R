@@ -94,14 +94,24 @@ NULL
 
 #' Transcripts with approved HGNC symbols
 #'
-#' Build hg19 corresonds to Ensembl build 75 and NCBI build 37.
+#' RefSeq transcripts from \code{TxDb.Hsapiens.UCSC.hg19.refGene}, restricted to
+#' chr1-22, X, Y, and M, with \code{gene_name} set to the approved HGNC symbol
+#' mapped from the RefSeq accession. NCBI build 37.
+#'
+#' The two cancer-gene annotations are derived from a literature-based gene list
+#' compiled 2016-03-05 (\code{inst/extdata/cancer_genes_2016-03-05.csv}):
+#' \code{biol_sign} marks genes of biological interest, and
+#' \code{cancer_connection} marks the clinically significant subset. See
+#' \code{\link{drivers}}.
 #'
 #' @docType data
 #' @keywords datasets
 #' @name transcripts
 #' @usage data(transcripts)
 #' @aliases transcripts
-#' @format a \code{GRanges} object
+#' @format a \code{GRanges} object with metadata columns \code{tx_id},
+#'   \code{tx_name}, \code{gene_name}, \code{cancer_connection}, and
+#'   \code{biol_sign}
 #'
 #' @examples
 #' data(transcripts)
