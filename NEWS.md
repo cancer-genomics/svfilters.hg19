@@ -1,3 +1,9 @@
+# svfilters.hg19 0.0.28
+
+- `citation("svfilters.hg19")` now lists Papp et al. 2018 (Cell Reports 25:2617-2633,
+  doi:10.1016/j.celrep.2018.10.096) first, followed by the package and the two
+  OncoKB references.
+
 # svfilters.hg19 0.0.27
 
 - `transcripts` again carries the `clinically_significant` and `cancer_gene`
